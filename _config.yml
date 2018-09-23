@@ -174,15 +174,15 @@ sections:
     content :
       enabled : true
     social_links :
-      enabled : false
-    github_projects :
       enabled : true
+    github_projects :
+      enabled : false
   social_links :
     enabled : false
   github_projects :
     enabled : false
   external_links :
-    enabled : true
+    enabled : false
   archive :
     enabled : false
   categories :
@@ -283,32 +283,32 @@ social_links :
   follow_name : Me
   links :
     - link :
-      enabled : true
+      enabled : false
       name : Facebook
       font_awesome_icon : icon-facebook
       url : https://www.facebook.com/
-    - link :
+    - link : https://github.com/evalcurious
       enabled : true
       name : GitHub
       font_awesome_icon : icon-github-alt
       url : https://github.com/
     - link :
-      enabled : true
+      enabled : false
       name: Google+
       font_awesome_icon : icon-google-plus
       url : https://plus.google.com/
-    - link :
+    - link : https://www.linkedin.com/in/joshuawpaul/
       enabled : true
       name : Linkedin
       font_awesome_icon : icon-linkedin
       url : http://www.linkedin.com/
     - link :
-      enabled : true
+      enabled : false
       font_awesome_icon : icon-pinterest
       name : Pinterest
       url : http://www.pinterest.com
     - link :
-      enabled : true
+      enabled : false
       name : Twitter
       font_awesome_icon : icon-twitter
       url : https://www.twitter.com/
@@ -572,7 +572,7 @@ disqus :
 #     enabled : true
 #     tracking_id : UA-1234567
 analytics :
-  enabled : false
+  enabled : true
   google_analytics :
-    enabled : false
-    tracking_id : UA-1234567
+    enabled : true
+    tracking_id : UA-126253930-1
