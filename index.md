@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Welcome
+title: Welcome to EvalCurious
 subtitle: Consultation Services for Data Analysis and Program Evaluation
 ---
 

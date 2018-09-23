@@ -1,6 +1,6 @@
 ---
 layout: page
-exclude: true
+title: EvalCurious Blog
 ---
 
 {% assign index_page_html = null %}
@@ -40,9 +40,9 @@ exclude: true
 					<small>
 						<div class="span3 offset1">
 							{% if site.font_awesome.enabled %}
-								<i class="icon-user"></i> 
+								<i class="icon-user"></i>
 							{% endif %}
-							Authored by 
+							Authored by
 							{% if p.author %}
 								{{ p.author }}.
 							{% else %}
@@ -51,7 +51,7 @@ exclude: true
 							<br>
 
 							{% if site.font_awesome.enabled %}
-								<i class="icon-pencil"></i> 
+								<i class="icon-pencil"></i>
 							{% endif %}
 							Published on {{ p.date | date_to_long_string }}.
 							<br>
@@ -67,7 +67,7 @@ exclude: true
 
 							{% if enable_disqus_show_comments %}
 								{% if site.font_awesome.enabled %}
-									<i class="icon-comments"></i> 
+									<i class="icon-comments"></i>
 								{% endif %}
 								<a href="{{ site.url }}{{ p.url }}#disqus_thread">Comments</a>
 								<br>
@@ -77,9 +77,9 @@ exclude: true
 						<div class="span3">
 							{% if p.category.size > 0 %}
 								{% if site.font_awesome.enabled %}
-									<i class="icon-folder-open"></i> 
+									<i class="icon-folder-open"></i>
 								{% endif %}
-								Category: 
+								Category:
 								<a href="{{ site.url }}/filter.html?category={{ p.category | replace: ' ', '___' | downcase }}">
 									{{ p.category | capitalize }}
 								</a>
@@ -103,9 +103,9 @@ exclude: true
 								{% endcapture %}
 
 								{% if site.font_awesome.enabled %}
-									<i class="icon-tags"></i> 
+									<i class="icon-tags"></i>
 								{% endif %}
-								Tags: 
+								Tags:
 								{% assign index_post_first_tag = true %}
 								{% assign index_post_prev_tag = '' %}
 								{% for index_post_i in (1..index_post_number_of_tags) %}
@@ -114,7 +114,7 @@ exclude: true
 										{% if index_post_first_tag %}
 											{% assign index_post_first_tag = false %}
 										{% else %}
-											, 
+											,
 										{% endif %}
 										{% assign index_post_prev_tag = index_post_tag %}
 										<a href="{{ site.url }}/filter.html?tag={{ index_post_tag }}">{{ index_post_tag | replace: '___', ' ' }}</a>

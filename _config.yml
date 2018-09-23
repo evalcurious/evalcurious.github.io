@@ -27,7 +27,7 @@ name : EvalCurious
 brand : EvalCurious
 description : Consultion Services for Program Evaluation and Data Analysis
 url : https://evalcurious.github.io
-email : 
+email :
 author: Joshua Paul
 
 
@@ -212,11 +212,11 @@ sections:
 #     enabled : false
 navbar :
   archive :
-    enabled : true
+    enabled : false
   categories :
-    enabled : true
+    enabled : false
   tags :
-    enabled : true
+    enabled : false
   github_projects :
     enabled : false
   social_links :
