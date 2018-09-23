@@ -40,6 +40,7 @@ exclude : [ README.md , version.txt ]
 # page. A value of 0 will indicate that you don't want to paginate, and all
 # blog posts will be on the index page.
 paginate : 10
+paginate_path: "/blog/page:num/"
 
 
 # To put a alert or notice on every page served, change the appropriate value
