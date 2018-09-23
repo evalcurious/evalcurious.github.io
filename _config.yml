@@ -287,21 +287,21 @@ social_links :
       name : Facebook
       font_awesome_icon : icon-facebook
       url : https://www.facebook.com/
-    - link : https://github.com/evalcurious
+    - link :
       enabled : true
       name : GitHub
       font_awesome_icon : icon-github-alt
-      url : https://github.com/
+      url : https://github.com/evalcurious
     - link :
       enabled : false
       name: Google+
       font_awesome_icon : icon-google-plus
       url : https://plus.google.com/
-    - link : https://www.linkedin.com/in/joshuawpaul/
+    - link :
       enabled : true
       name : Linkedin
       font_awesome_icon : icon-linkedin
-      url : http://www.linkedin.com/
+      url : https://www.linkedin.com/in/joshuawpaul/
     - link :
       enabled : false
       font_awesome_icon : icon-pinterest
