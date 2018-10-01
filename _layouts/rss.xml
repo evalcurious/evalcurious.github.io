@@ -31,7 +31,13 @@
 				</image>
 			{% endif %}
 
-			{% for p in site.posts %}
+			{% if page.rss-tag %}
+				{% assign rss_list = site.posts | where:"tags",page.rss-tag %}
+			{% else %}
+				{% assign rss_list = site.posts %}
+			{% endif %}
+
+			{% for p in rss_list %}
 				<item>
 					{% if p.title %}
 						<title>{{ p.title }}</title>
