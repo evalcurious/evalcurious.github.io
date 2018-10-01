@@ -31,7 +31,7 @@
 				</image>
 			{% endif %}
 
-			{% for p in {{ site.posts | where:"tags",page.rss-tag }} %}
+			{% for p in site.posts | where:"tags",page.rss-tag %}
 				<item>
 					{% if p.title %}
 						<title>{{ p.title }}</title>
