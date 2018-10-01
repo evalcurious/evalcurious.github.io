@@ -3,4 +3,4 @@ layout: page
 title: Tags Foo
 ---
 
-{{ site.posts }}
+{{ site.posts | where:"tags","evaluation" }}
