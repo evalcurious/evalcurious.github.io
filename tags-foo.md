@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Tags Foo
-rss-tag: R
+rss-tag: evaluation
 ---
 
 {{ site.posts | where:"tags",page.rss-tag }}
