@@ -3,4 +3,4 @@ layout: page
 title: Tags Foo
 ---
 
-{{ site }}
+{{ site.tags | where:"evaluation" }}
