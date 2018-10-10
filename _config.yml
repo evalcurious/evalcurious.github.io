@@ -35,6 +35,8 @@ author: Joshua Paul
 # generated gh-pages website.
 exclude : [ README.md , version.txt ]
 
+# Hide future dated posts
+future: false
 
 # Replace the number with the default number of blot posts you want on each
 # page. A value of 0 will indicate that you don't want to paginate, and all
