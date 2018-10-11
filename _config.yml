@@ -552,7 +552,7 @@ rss :
 #   show_comment_count : false
 disqus :
   enabled : true
-  shortname : evalcurious-github-ios
+  shortname : evalcurious-github-io
   show_comment_count : true
 
 
