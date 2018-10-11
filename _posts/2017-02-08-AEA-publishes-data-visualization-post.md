@@ -1,7 +1,6 @@
 ---
 layout : post
-title : American Evaluation Association Publishes My Blog Post on Data Visualization
-comments: true
+title : American Evaluation Association Publishes My Blog Post on Data Visualizations
 tags:
   - evaluation
   - data visualization
