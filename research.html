@@ -4,10 +4,14 @@ title: Research
 ---
 
 {% for research in site.research %}
-  <h2>
-    <a href="{{ research.url }}">
-      {{ research.title }}
-    </a>
-  </h2>
-  <p>{{ research.content | markdownify }}</p>
+<div class="ghpb-post">
+  <div class="well ghpb-well-outline">
+    <h2>
+      <a href="{{ research.url }}">
+        {{ research.title }}
+      </a>
+    </h2>
+    <p>{{ research.content | markdownify }}</p>
+  </div>
+</div>
 {% endfor %}
