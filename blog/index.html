@@ -44,7 +44,7 @@ title: Blog
 							{% endif %}
 							Authored by
 							{% if p.author %}
-								{{ p.author }}.
+								 {{ p.author | array_to_sentence_string }}.
 							{% else %}
 								{{ site.author }}.
 							{% endif %}

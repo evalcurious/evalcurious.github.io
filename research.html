@@ -3,7 +3,8 @@ layout: page
 title: Research
 ---
 
-{% for research in site.research %}
+{% assign research_list = site.research | reverse %}
+{% for research in research_list %}
 <div class="ghpb-post">
   <div class="well ghpb-well-outline">
     <h2>
@@ -11,7 +12,9 @@ title: Research
         {{ research.title }}
       </a>
     </h2>
-    <p>{{ research.content | markdownify }}</p>
+    {% if research.type and research.location %}
+      <h4>{{ research.type }} - {{ research.location }}</h4>
+		{% endif %}
   </div>
 </div>
 {% endfor %}
