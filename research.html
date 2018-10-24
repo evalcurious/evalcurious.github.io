@@ -15,6 +15,8 @@ title: Research
     {% if research.type and research.location %}
       <h4>{{ research.type }} - {{ research.location }}</h4>
 		{% endif %}
+    <br>
+    {{ research.excerpt }}
   </div>
 </div>
 {% endfor %}
