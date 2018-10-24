@@ -20,6 +20,9 @@
 						{% include body/sections/header/research.html %}
 						{% include body/sections/alerts_and_notices/post.html %}
 						{{ content }}
+						{% if page.embed_file %}
+							{% include embed.html file=page.embed_file type=page.embed_type %}
+						{% endif %}
 						{% if enable_disqus %}
 							<br>
 							<br>
