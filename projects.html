@@ -1,0 +1,19 @@
+---
+layout: page
+title: Projects
+---
+
+{% assign project_list = site.projects | reverse %}
+{% for project in project_list %}
+<div class="ghpb-post">
+  <div class="well ghpb-well-outline">
+    <h2>
+      <a href="{{ project.url }}">
+        {{ project.title }}
+      </a>
+    </h2>
+    <br>
+    {{ project.excerpt }}
+  </div>
+</div>
+{% endfor %}

@@ -40,12 +40,15 @@ future: false
 # Replace the number with the default number of blot posts you want on each
 # page. A value of 0 will indicate that you don't want to paginate, and all
 # blog posts will be on the index page.
+plugins: [jekyll-paginate]
 paginate : 10
 paginate_path: "/blog/page:num/"
 
 # Create collections for use in sections other than the blog.
 collections:
   research:
+    output: true
+  projects:
     output: true
 
 # To put a alert or notice on every page served, change the appropriate value
