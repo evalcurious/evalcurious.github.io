@@ -9,9 +9,9 @@ title: Blog
 		<div class="ghpb-post">
 			<div class="well ghpb-well-outline">
 				{% if p.title %}
-					<h2><a href="{{ site.url }}{{ p.url }}">{{ p.title }}</a></h2>
+					<h3><a href="{{ site.url }}{{ p.url }}" class="title-link">{{ p.title }}</a></h3>
 				{% else %}
-					<h2><a href="{{ site.url }}{{ p.url }}">{{ site.description }}</a></h2>
+					<h3><a href="{{ site.url }}{{ p.url }}" class="title-link">{{ site.description }}</a></h3>
 				{% endif %}
 				{% if p.subtitle %}
 					<h4>{{ p.subtitle }}</h4>
@@ -32,10 +32,8 @@ title: Blog
 					{% endif %}
 				{% endif %}
 
-				<br>
 				{{ p.content }}
 
-				<br>
 				<div class="row">
 					<small>
 						<div class="span3 offset1">

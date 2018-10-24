@@ -1,5 +1,5 @@
 .ghpb-well-outline {
-  background-color: transparent; 
+  background-color: transparent;
 }
 
 .ghpb-well-outline blockquote {
@@ -24,4 +24,8 @@
 .ghpb-post p {
   font-size: larger;
   margin-bottom: 20px;
+}
+
+a.title-link {
+    color: darkorange;
 }

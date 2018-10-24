@@ -7,15 +7,10 @@ title: Research
 {% for research in research_list %}
 <div class="ghpb-post">
   <div class="well ghpb-well-outline">
-    <h2>
-      <a href="{{ research.url }}">
-        {{ research.title }}
-      </a>
-    </h2>
+    <h3><a href="{{ research.url }}" class="title-link">{{ research.title }}</a></h3>
     {% if research.type and research.location %}
       <h4>{{ research.type }} - {{ research.location }}</h4>
 		{% endif %}
-    <br>
     {{ research.excerpt }}
   </div>
 </div>
