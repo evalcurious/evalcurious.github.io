@@ -32,7 +32,7 @@ title: Blog
 					{% endif %}
 				{% endif %}
 
-				{{ p.content }}
+				<p>{{ p.content | markdownify | strip_html | truncatewords: 50 }}</p>
 
 				<div class="row">
 					<small>
