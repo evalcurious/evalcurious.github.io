@@ -44,7 +44,7 @@ locations$lng <- sapply(locations$json, FUN=function(x) jsonParse(x)$lng)
 locations <- locations[, !(names(locations) %in% "json")]
 write.csv(locations, "locationsGeocoded.csv", row.names=FALSE)
 ```
-## Loading the necessary packages and address dataframe
+## Loading the necessary packages and address data frame
 ```R
 # install.packages("jsonlite")
 require(xml2)
@@ -52,9 +52,9 @@ require(jsonlite)
 
 locations <- read.csv(paste0(getwd(),"//locations.csv"),stringsAsFactors = FALSE)
 ```
-As in Part 1, we need to load the packages we'll need to simplify the task ahead. For geocoding, we will be using xml2 and jsonlite. You should already have xml2 installed if you have been following along since part 1, but you may not have jsonlite installed. As before, I have "commented out" the code for installing jsonlite because I already have it installed. If you need to install it, remove the "#". The "require(...)" command loads the packages.
+As in Part 1, we need to load the packages we'll need to simplify the task ahead. For geocoding, we will be using xml2 and jsonlite. You should already have xml2 installed if you have been following along since Part 1, but you may not have jsonlite installed. As before, I have "commented out" the code for installing jsonlite because I already have it installed. If you need to install it, remove the "#". The "require(...)" command loads the packages.
 
-In addition, we need to load the address information we collected in part 1. the last line of the code below reads in the csv file from our working directory. The "paste0(...)" command combines different pieces of text given to it without putting any spaces between it. The "getwd()" function provides the text version of our working directory, and the "//locations.csv" gives the name of the file that we're looking for. Finally, the "stringsAsFactors=FALSE" options tells R that we do not want it to treat text in the CSV as representing different categories. We just want the plain text. This is important because if R returns factors, instead of sending the address to the API, it might send a number representing that address as a category, and the API won't know what to do with it.
+In addition, we need to load the address information we collected in Part 1. the last line of the code below reads in the csv file from our working directory. The "paste0(...)" command combines different pieces of text given to it without putting any spaces between it. The "getwd()" function provides the text version of our working directory, and the "//locations.csv" gives the name of the file that we're looking for. Finally, the "stringsAsFactors=FALSE" options tells R that we do not want it to treat text in the CSV as representing different categories. We just want the plain text. This is important because if R returns factors, instead of sending the address to the API, it might send a number representing that address as a category, and the API won't know what to do with it.
 
 ## Defining our MapQuest API key
 ```R
