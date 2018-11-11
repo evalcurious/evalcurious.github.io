@@ -1,7 +1,13 @@
 {% if site.rss.enabled %}<?xml version="1.0"?>
 	<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
 		<channel>
-			<title>{{ site.name }}</title>
+			<title>
+				{% if page.rss-tag %}
+					{{ site.name }} - {{ page.rss-tag }}
+				{% else %}
+					{{ site.name }}
+				{% endif %}
+			</title>
 			<link>{{ site.url }}</link>
 			<description>{{ site.description }}</description>
 			<language>en-us</language>
