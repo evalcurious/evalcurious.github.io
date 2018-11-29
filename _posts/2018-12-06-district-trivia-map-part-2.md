@@ -8,7 +8,7 @@ tags:
   - Geocoding
   - Tutorial
 ---
-Now that we have generated a list of addresses in [Part 1 of this series]({{ site.baseurl }}), we are ready to geocode these addresses--that is, turn the addresses into the latitude and longitude coordinates we will need to map them.
+Now that we have generated a list of addresses in [Part 1 of this series]({{ site.baseurl }}{% post_url 2018-11-29-district-trivia-map-part-1 %}), we are ready to geocode these addresses--that is, turn the addresses into the latitude and longitude coordinates we will need to map them.
 
 The following code contains everything that is necessary to accomplish this task. There are some geocoding packages out there, for instance [Nominatim](https://www.r-bloggers.com/introducing-the-nominatim-geocoding-package/), but I had some trouble getting these packages to act as I needed them to, so I decided to geocode directly through the MapQuest API, which turned out to be less work for me.
 

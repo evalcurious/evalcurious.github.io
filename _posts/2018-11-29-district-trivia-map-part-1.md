@@ -328,4 +328,4 @@ This creates a record of all of the events that we can then export as an excel o
 
 This last line saves the output data frame we created as a CSV file in your working directory. (If you don't know what your working directory is, you can type "getwd()" into the console.) If you add the row.names=FALSE option, your CSV will start with a variable that represents the row number in the output data frame. I find this annoying, so I prevent R from producing it. I also usually leave this line commented out until I am sure that the entire process worked correctly, then I will delete the # and run the line to save my results.
 
-Now that we have the addresses, we're ready to geocode them. I will cover this process in next week's blog post. 
+Now that we have the addresses, we're ready to geocode them. I will cover this process in next week's blog post.
