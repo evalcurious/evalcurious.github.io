@@ -9,7 +9,7 @@ In California, my grad school friends and I got into a bit of a pub trivia kick.
 
 <!--more-->
 The process for making this map involved:
-  1. [Web scraping]({{ site.baseurl }}{% post_url 2018-11-30-district-trivia-map-part-1 %}) the addresses of event locations from the trivia company's website using XML
+  1. [Web scraping]({{ site.baseurl }}) the addresses of event locations from the trivia company's website using XML
   2. [Geocoding addresses]({% link blog/index.html %}) using MapQuest's API
   3. [Generating a map]({% link blog/index.html %}) using the Leaflet for R library
 
