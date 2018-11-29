@@ -9,8 +9,8 @@ In California, my grad school friends and I got into a bit of a pub trivia kick.
 
 <!--more-->
 The process for making this map involved:
-  1. [Web scraping]({{ site.baseurl }}{% post_url 2018-11-29-district-trivia-map-part-1 %}) the addresses of event locations from the trivia company's website using XML
-  2. [Geocoding addresses]({% link blog/index.html %}) using MapQuest's API
-  3. [Generating a map]({% link blog/index.html %}) using the Leaflet for R library
+  1. Web scraping the addresses of event locations from the trivia company's website using XML
+  2. Geocoding addresses using MapQuest's API
+  3. Generating a map using the Leaflet for R library
 
 All of these steps were conducted in R and will be covered in tutorials on my [blog](/blog/) over the next several weeks.

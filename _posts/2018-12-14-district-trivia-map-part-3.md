@@ -8,7 +8,7 @@ tags:
   - Leaflet
   - Tutorial
 ---
-In [Part 1 of this series]({{ site.baseurl }}{% post_url 2018-11-29-district-trivia-map-part-1 %}), we used some web scraping techniques to collect a list of addresses. In [Part 2]({{ site.baseurl }}{% post_url 2018-12-06-district-trivia-map-part-2 %}), we geocoded these addresses with MapQuest's API to find coordinates in latitude and longitude format. Now that we have a set of coordinates, we are ready to build an interactive web map using Leaflet for R. The following code is all we need to build a nice looking map.
+In [Part 1 of this series]({{ site.baseurl }}{% post_url 2018-11-30-district-trivia-map-part-1 %}), we used some web scraping techniques to collect a list of addresses. In [Part 2]({{ site.baseurl }}{% post_url 2018-12-07-district-trivia-map-part-2 %}), we geocoded these addresses with MapQuest's API to find coordinates in latitude and longitude format. Now that we have a set of coordinates, we are ready to build an interactive web map using Leaflet for R. The following code is all we need to build a nice looking map.
 
 ```R
 # install.packages("leaflet")
