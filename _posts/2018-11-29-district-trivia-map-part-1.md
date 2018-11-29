@@ -59,7 +59,7 @@ for (i in 1:nrow(locations)) {
 # write.csv(output, "locations.csv", row.names=FALSE)
 ```
 
-This code can be broken down into a hand full of sections. We'll go through them one-by-one to see what each line does.
+This code can be broken down into a handful of sections. We'll go through them one-by-one to see what each line does.
 
 ## Loading the necessary packages
 ```R
