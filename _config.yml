@@ -190,7 +190,7 @@ sections:
   github_projects :
     enabled : false
   external_links :
-    enabled : false
+    enabled : true
   archive :
     enabled : false
   categories :
@@ -373,11 +373,14 @@ github_projects :
 #       name : Lowcountry Blues Club
 #       url : http://lowcountrybluesclub.blogspot.com
 external_links :
-  header : More Great gh-pages-blog Sites
+  header : More Great Blogs
   links :
     - link :
-      name : The Dereck
-      url: https://thedereck.github.io
+      name : R-bloggers
+      url: https://www.r-bloggers.com/
+    - link :
+      name : R Psychologist
+      url: https://rpsychologist.com/
 
 
 # These are the Bootstrap settings. These Bootstrap settings will control both
