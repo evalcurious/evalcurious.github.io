@@ -16,4 +16,6 @@ The process for making this map involved:
   2. {% if site.time >= page.date_2 %}[Geocoding]({{ site.baseurl }}{% post_url 2018-12-07-district-trivia-map-part-2 %}){% else %}Geocoding{% endif %} addresses using MapQuest's API
   3. {% if site.time >= page.date_3 %}[Generating]({{ site.baseurl }}{% post_url 2018-12-14-district-trivia-map-part-3 %}){% else %}Generating{% endif %} a map using the Leaflet for R library
 
-All of these steps were conducted in R and will be covered in tutorials on my [blog](/blog/) over the next several weeks.
+All of these steps were conducted in R and have been covered in tutorials on my [blog](/blog/).
+
+*Locations Updated: July 21st, 2019*
