@@ -40,7 +40,7 @@
 					{% if site.font_awesome.enabled %}
 						<i class="icon-user"></i>
 					{% endif %}
-					Authored by 
+					Authored by
 					{% if page.author %}
 						{{ page.author | array_to_sentence_string }}.
 					{% else %}
@@ -81,7 +81,7 @@
 								{% if page_tag_first %}
 									{% assign page_tag_first = false %}
 								{% else %}
-									,
+									, 
 								{% endif %}
 								{% assign prev_page_tag = page_tag %}
 								<a href="{{ site.url }}/filter.html?tag={{ page_tag }}">{{ page_tag | replace: '___', ' ' }}</a>

@@ -112,7 +112,7 @@ title: Blog
 										{% if index_post_first_tag %}
 											{% assign index_post_first_tag = false %}
 										{% else %}
-											,
+											, 
 										{% endif %}
 										{% assign index_post_prev_tag = index_post_tag %}
 										<a href="{{ site.url }}/filter.html?tag={{ index_post_tag }}">{{ index_post_tag | replace: '___', ' ' }}</a>
