@@ -1,0 +1,266 @@
+---
+layout : post
+title : Efficient Coding in R - Vectorizing a Monte Carlo Simulation
+subtitle: Techniques for speeding up your R code
+tags:
+  - R
+  - Statistics
+  - Monte___Carlo
+  - Simulation
+  - Vectorization
+---
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+
+
+<script src="monteCarloLoop_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="monteCarloLoop_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="monteCarloLoop_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="monteCarloLoop_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="monteCarloLoop_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="monteCarloLoop_files/navigation-1.1/tabsets.js"></script>
+<link href="monteCarloLoop_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="monteCarloLoop_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
+<p>A lot of programming tasks require you to repeat the same operation multiple times on each of a set of input items. In many programming languages, the most convenient way to accomplish this is to write a for loop. However, most R blogs online suggest to their readers that they “vectorize” their code whenever possible. For a really long time I did not know exactly what this meant. I was able to point to certain R functions as vectorized functions and use them appropriately, I did not know how to take advantage of vectorization when I was writing my own functions.</p>
+<div id="what-is-vectorization" class="section level2">
+<h2>What is Vectorization?</h2>
+<p>Vectorized functions will return a vector of the same length as the longest input to the function, usually recycling any input shorter than that value. These functions represent a specialized way of repeating the same operation on every item in a set of data.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIFZlY3Rvcml6ZWRcbnBhc3RlKFwiTnVtYmVyXCIsMToxMClcbjE6MTArM1xuXG4jIE5vdCBWZWN0b3JpemVkXG5tZWFuKDE6MTApIn0=
+</div>
+<p>However, even if a function repeats the same operation on a set of data and outputs a vector the same length as the input vector, it may not be truely vectorized. Truely vectorized functions do this repeating process outside of the R language, usually in the code that underlies R itself: C++. Performing this process outside of R (which is an interpreted language) in C++ (which is a compiled language) makes vectorized functions much faster than if an operation was repeated within R itself because it simplifies the work the computer has to do. The end effect for the user is that a vectorized function appears to produce the resulting vector all at once rather than item by item.</p>
+</div>
+<div id="speeding-up-a-monte-carlo-simulation" class="section level2">
+<h2>Speeding up a Monte Carlo Simulation</h2>
+<p>Vectorization is not super noticeable to most R users until you have repeat a complex process many times. This can be particularly valuable for simulations. Say you are a statistics professor who wants to create a demonstration of the central limit theorem. You might start by building a Monte Carlo simulation in which you pull multiple samples from a distribution for which you have defined the main parameters. In many programming language, you might accomplish this with a <em>for loop</em> using a strategy like that below:</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJyZXF1aXJlKGRhdGEudGFibGUpXG5cbm1vbnRlY2FybG8ubG9vcCA8LSBmdW5jdGlvbihuLnNhbXBsZXMsc2FtcGxlLnNpemUsbXUsc2QpIHtcbiAgb3V0IDwtIGRhdGEudGFibGUoc2FtcGxlLmlkPWNoYXJhY3RlcigpLG1lYW49bnVtZXJpYygpLHNkPW51bWVyaWMoKSlcbiAgZm9yIChpIGluIDE6bi5zYW1wbGVzKSB7XG4gICAgc2FtcGxlIDwtIHJub3JtKHNhbXBsZS5zaXplLG11LHNkKVxuICAgIG91dCA8LSByYmluZChvdXQsZGF0YS50YWJsZShzYW1wbGUuaWQ9aSxtZWFuPW1lYW4oc2FtcGxlKSxzZD1zZChzYW1wbGUpKSlcbiAgfVxuICBvdXRcbn1cblxuc3lzdGVtLnRpbWUobW9udGVjYXJsby5sb29wKDEwMDAsMzAsNSwxLjUpKVxuXG5vdXQubG9vcCA8LSBtb250ZWNhcmxvLmxvb3AoMTAwMCwzMCw1LDEuNSlcblxuI0lmIHlvdSB3YW50IHRvIHRha2UgYSBsb29rIGF0IHRoZSBnZW5lcmF0ZWQgc2FtcGxpbmcgZGlzdHJpYnV0aW9uLCBydW4gdGhlIGZvbGxvd2luZyBsaW5lXG4jaGlzdChvdXQubG9vcCRtZWFuKSJ9
+</div>
+<p>Because the for loop is written in R itself, this implementation of the Monte Carlo simulation will be slow compared to what it could be. If we wanted to really speed it up, we would write a function that called on the code underlying R instead. Luckily, we don’t have to do that. R has a provided a way of hiding this for loop that allows the code to be implemented faster: the function <em>lapply</em>. This function is not true vectorization, but it does allow the user to run a function on a set of data many times much more quickly than an explicit for loop. One implementaion of this technique is below.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJyZXF1aXJlKGRhdGEudGFibGUpXG5cbm1vbnRlY2FybG8ubGFwcGx5IDwtIGZ1bmN0aW9uKGksc2FtcGxlLnNpemUsbXUsc2QpIHtcbiAgICBzYW1wbGUgPC0gcm5vcm0oc2FtcGxlLnNpemUsbXUsc2QpXG4gICAgZGF0YS50YWJsZShzYW1wbGUuaWQ9aSxtZWFuPW1lYW4oc2FtcGxlKSxzZD1zZChzYW1wbGUpKVxufVxuXG5cbnN5c3RlbS50aW1lKGxhcHBseSgxOjEwMDAsZnVuY3Rpb24oaSkgbW9udGVjYXJsby5sYXBwbHkoaSwzMCw1LDEuNSkpKVxuXG5vdXQubGFwcGx5IDwtIHJiaW5kbGlzdChsYXBwbHkoMToxMDAwLGZ1bmN0aW9uKGkpIG1vbnRlY2FybG8ubGFwcGx5KGksMzAsNSwxLjUpKSlcblxuI0lmIHlvdSB3YW50IHRvIHRha2UgYSBsb29rIGF0IHRoZSBnZW5lcmF0ZWQgc2FtcGxpbmcgZGlzdHJpYnV0aW9uLCBydW4gdGhlIGZvbGxvd2luZyBsaW5lXG4jaGlzdChvdXQubGFwcGx5JG1lYW4pIn0=
+</div>
+<p>To truely optimize our code, we want to avoid using any for loops at all, meaning we also want to avoid using lapply. We won’t be vectorizing our code directly in that we won’t be writing anything in C++. Instead, we will be writing a function that takes advantage of multiple vectorized native R functions. This reduces the number of tasks that the computer has to do in the R program and speeds up execution.</p>
+<p>For this example, I take advantage of the nature of random selection to cut out some of the steps inherent in the for loop approach. I use an id variable to mark what sample a particular value will be assigned to, generating as many id values as there are samples and repeating these values for the desired number of simluation trials using the vectorized <em>rep</em> function. I then draw a much larger sample using <em>rnorm</em> than I have in the prior examples, generating all values for all samples at once. Then I aggregate by sample as I have done before. The result is essentially equivalent to the above examples, but it is accomplished much more quickly.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJyZXF1aXJlKGRhdGEudGFibGUpXG5cbm1vbnRlY2FybG8udmVjdG9yaXplZCA8LSBmdW5jdGlvbihuLnNhbXBsZSxzYW1wbGUuc2l6ZSxtdSxzZCkge1xuICBkdCA8LSBkYXRhLnRhYmxlKHNhbXBsZS5pZD1yZXAoMTpuLnNhbXBsZSxyZXAoc2FtcGxlLnNpemUsbi5zYW1wbGUpKSxcbiAgICAgICAgICAgICAgICAgICB2YWx1ZXM9cm5vcm0obi5zYW1wbGUqc2FtcGxlLnNpemUsbXUsc2QpKVxuICBkdFssLihtZWFuPW1lYW4odmFsdWVzKSxzZD1zZCh2YWx1ZXMpKSxrZXlieT1zYW1wbGUuaWRdIFxufVxuXG5zeXN0ZW0udGltZShtb250ZWNhcmxvLnZlY3Rvcml6ZWQoMTAwMCwzMCw1LDEuNSkpXG5cbm91dC52ZWN0b3JpemVkIDwtIG1vbnRlY2FybG8udmVjdG9yaXplZCgxMDAwLDMwLDUsMS41KVxuXG4jSWYgeW91IHdhbnQgdG8gdGFrZSBhIGxvb2sgYXQgdGhlIGdlbmVyYXRlZCBzYW1wbGluZyBkaXN0cmlidXRpb24sIHJ1biB0aGUgZm9sbG93aW5nIGxpbmVcbiNoaXN0KG91dC52ZWN0b3JpemVkJG1lYW4pIn0=
+</div>
+<p>I have one caveat about this approach. At work, I am limited to the processing power available on my assigned laptop. Unfortunately, generating the very large vectors necessary to implement the above approach can take a lot of memory, so in practice, I usually adopt a hybrid approach. I avoid for loops in the actual generation and calculation, but I break up the task into smaller vectors that my computer memory can handle, saving each chunck in a CSV file or database as I go. This way, I can take advantage of the speedier vectorized functions without freezing up the program by loading too much data into RAM.</p>
+<p>I hope these examples are helpful. As always, I welcome your feedback and questions!</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
